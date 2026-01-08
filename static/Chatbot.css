@@ -1,0 +1,229 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    height: 100vh;
+    background: #f1f5f9;
+}
+
+/* ===============================
+   MAIN CONTAINER
+================================ */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    background-color: #e0f2fe; /* fallback */
+    overflow: hidden;
+}
+
+/* ===============================
+   SCATTERED EMOJIS
+================================ */
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: none;
+    z-index: 0;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none; /* emojis won’t block clicks */
+}
+
+.emoji-bg {
+    position: absolute;
+    z-index: 0;
+    width: 32px;
+    height: 32px;
+    opacity: 0.08; /* very subtle */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Example of scattered emojis — you can add more with different positions */
+.emoji1 { top: 10%; left: 5%; transform: rotate(15deg); background-image: url('https://cdn-icons-png.flaticon.com/512/3188/3188097.png'); }
+.emoji2 { top: 30%; left: 60%; transform: rotate(-25deg); background-image: url('https://cdn-icons-png.flaticon.com/512/3076/3076597.png'); }
+.emoji3 { top: 50%; left: 20%; transform: rotate(45deg); background-image: url('https://cdn-icons-png.flaticon.com/512/3188/3188097.png'); }
+.emoji4 { top: 70%; left: 80%; transform: rotate(-10deg); background-image: url('https://cdn-icons-png.flaticon.com/512/3076/3076597.png'); }
+.emoji5 { top: 85%; left: 15%; transform: rotate(30deg); background-image: url('https://cdn-icons-png.flaticon.com/512/3188/3188097.png'); }
+
+/* ===============================
+   HEADER
+================================ */
+.chat-header {
+    background: #0f172a;
+    color: #facc15;
+    padding: 14px 16px;
+    font-weight: 700;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.chat-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+/* ===============================
+   CHAT AREA
+================================ */
+#chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===============================
+   MESSAGE BUBBLES
+================================ */
+.message {
+    margin: 8px 0;
+    padding: 12px 16px;
+    border-radius: 18px;
+    max-width: 80%;
+    animation: fadeIn 0.25s ease;
+    font-size: 0.95em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+}
+
+.message.bot {
+    background: #1e293b;
+    color: #f8fafc;
+    align-self: flex-start;
+}
+
+.message.user {
+    background: #facc15;
+    color: #1e293b;
+    align-self: flex-end;
+    font-weight: 600;
+}
+
+.message.error {
+    background: #ef4444;
+    color: white;
+    align-self: center;
+}
+
+/* ===============================
+   OPTION MESSAGE (INSIDE CHAT)
+================================ */
+.option-message {
+    padding: 10px;
+}
+
+.chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-option-btn {
+    background: #facc15;
+    color: #1e293b;
+    border: none;
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.chat-option-btn:hover {
+    background: #fde047;
+    transform: translateY(-1px);
+}
+
+.chat-option-btn:active {
+    transform: scale(0.98);
+}
+
+/* ===============================
+   INPUT AREA
+================================ */
+.input-area {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: #0f172a;
+    border-top: 1px solid #1e293b;
+    position: relative;
+    z-index: 1;
+}
+
+input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    font-size: 0.95em;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+button {
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: none;
+    background: #facc15;
+    color: #1e293b;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #fde047;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===============================
+   DESKTOP VIEW
+================================ */
+@media (min-width: 768px) {
+    .container {
+        max-width: 420px;
+        margin: 20px auto;
+        height: 85vh;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+}

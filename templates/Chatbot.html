@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KKMJP Chatbot</title>
+
+    <!-- Flask static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Chatbot.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===============================
+         Scattered Emoji Background
+    =============================== -->
+    <div class="emoji-bg emoji1"></div>
+    <div class="emoji-bg emoji2"></div>
+    <div class="emoji-bg emoji3"></div>
+    <div class="emoji-bg emoji4"></div>
+    <div class="emoji-bg emoji5"></div>
+    <div class="emoji-bg emoji6"></div>
+    <div class="emoji-bg emoji7"></div>
+    <div class="emoji-bg emoji8"></div>
+    <div class="emoji-bg emoji9"></div>
+    <div class="emoji-bg emoji10"></div>
+
+    <!-- Header with Logo + Title -->
+    <div class="chat-header">
+        <img src="{{ url_for('static', filename='bot.png') }}" alt="KKMJP Logo" class="chat-logo">
+        <span>KKMJP SUPERAGENT</span>
+    </div>
+
+    <!-- Chat messages -->
+    <div id="chat"></div>
+
+    <!-- Input area -->
+    <div class="input-area">
+        <input type="text" placeholder="Type your message..." id="user-input">
+        <button id="send-btn">Send</button>
+    </div>
+
+</div>
+
+<!-- Flask static JS -->
+<script src="{{ url_for('static', filename='Chatbot.js') }}"></script>
+
+<!-- Optional: dynamically generate emojis in JS for more randomness -->
+<script>
+    const container = document.querySelector('.container');
+    const emojis = [
+        'https://cdn-icons-png.flaticon.com/512/3188/3188097.png',
+        'https://cdn-icons-png.flaticon.com/512/3076/3076597.png',
+        'https://cdn-icons-png.flaticon.com/512/3188/3188097.png'
+    ];
+
+    // Generate 30 random scattered emojis
+    for (let i = 0; i < 30; i++) {
+        const div = document.createElement('div');
+        div.classList.add('emoji-bg');
+        div.style.backgroundImage = `url('${emojis[Math.floor(Math.random() * emojis.length)]}')`;
+        div.style.top = Math.random() * 100 + '%';
+        div.style.left = Math.random() * 100 + '%';
+        div.style.transform = `rotate(${Math.random() * 360}deg)`;
+        div.style.width = div.style.height = (16 + Math.random() * 24) + 'px';
+        div.style.opacity = 0.08 + Math.random() * 0.07;
+        container.appendChild(div);
+    }
+</script>
+
+</body>
+</html>
