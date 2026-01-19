@@ -43,10 +43,18 @@ def submit_dob():
         today = datetime.date.today()
         age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
 
+        # Under 18 block
         if age < 18:
             return jsonify(
                 blocked=True,
                 message="We are sorry. This chatbot is only available for individuals aged 18 and above."
+            )
+
+        # 80 and above block
+        if age >= 80:
+            return jsonify(
+                blocked=True,
+                message="We are sorry. This chatbot is only available for individuals below 80 years old."
             )
 
         session['dob'] = dob
@@ -60,8 +68,10 @@ def submit_dob():
                 "Do you currently have insurance coverage?"
             )
         )
+
     except:
         return jsonify(error="Please enter date in DD/MM/YYYY format.")
+
 
 # -----------------------------
 # Insurance selection
